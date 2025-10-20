@@ -1,72 +1,50 @@
-<div class="text-center py-3">
-  <h2 class="fw-bold text-gradient mb-0">Masjid Prayer Time Panel</h2>
-  <hr class="mx-auto mt-2" style="width: 60px; height: 4px; border: none; background: linear-gradient(90deg, #3b82f6, #16a34a);">
+<div class="text-center py-1">
+  <h2 class="fw-bold text-gradient">Salah Timings</h2>
 </div>
 
-<div class="container py-4">
-
-  <!-- Main Row : Left & Right -->
+<div class="container py-2">
   <div class="row g-4">
     
-    <!-- Left Section -->
+    <!-- LEFT SECTION -->
     <div class="col-12 col-lg-6 d-flex flex-column gap-3">
 
-      <!-- Time Card -->
-      <div class="p-4 border rounded text-center text-light" style="background: linear-gradient(135deg, #3b82f6, #06b6d4);">
+      <!-- TIME & DATE CARD -->
+      <div class="p-4 border rounded text-center text-light"
+           style="background: linear-gradient(135deg, #3b82f6, #06b6d4);">
         <h4 class="mb-1">{{ currentTime }}</h4>
         <p class="mb-1">{{ dayOfWeek }}</p>
         <p class="mb-1">{{ day }} - {{ month }} {{ year }}</p>
         <small>{{ islamicDateNumber }} - {{ islamicMonthName }} - {{ islamicYear }}</small>
       </div>
 
-      <!-- Current Salah -->
-      <div *ngIf="currentSalah" class="p-4 border-0 rounded text-center text-white" 
-           style="background: linear-gradient(135deg, #16a34a, #4ade80);">
-        <h5 class="fw-semibold">{{ currentSalah.name }}</h5>
-        <div class="d-flex justify-content-between mt-2">
-          <span>Start: {{ currentSalah.startTime }}</span>
-          <span>End: {{ currentSalah.endTime }}</span>
-        </div>
-      </div>
-
-      <!-- Tulu, Zawal, Gurub Times -->
-      <div class="d-flex flex-wrap justify-content-between gap-3">
-        <div class="flex-fill p-3 border-0 rounded text-center text-light" style="background: linear-gradient(135deg, #fcd34d, #facc15);">
-          <p class="fw-medium mb-1">TULU</p>
-          <p class="mb-0">{{ tuluTime }}</p>
-        </div>
-        <div class="flex-fill p-3 border-0 rounded text-center text-light" style="background: linear-gradient(135deg, #fb7185, #f43f5e);">
-          <p class="fw-medium mb-1">ZAWAL</p>
-          <p class="mb-0">{{ zawalTime }}</p>
-        </div>
-        <div class="flex-fill p-3 border-0 rounded text-center text-light" style="background: linear-gradient(135deg, #60a5fa, #3b82f6);">
-          <p class="fw-medium mb-1">GURUB</p>
-          <p class="mb-0">{{ gurubTime }}</p>
+      <!-- PRAYER TIMES LIST -->
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <div 
+          *ngFor="let key of prayerTimes | keyvalue: originalOrder"
+          class="rounded p-3 text-center flex-fill text-white shadow"
+          style="min-width: 150px; max-width: 200px; background: linear-gradient(135deg, #0ea5e9, #22d3ee);">
+          <h6 class="fw-semibold mb-1">{{ key.key | titlecase}}</h6>
+          <small>{{ key.value }}</small>
         </div>
       </div>
 
     </div>
 
-    <!-- Right Section -->
+    <!-- RIGHT SECTION -->
     <div class="col-12 col-lg-6 d-flex flex-column gap-3">
 
-      <!-- Jamaat Time -->
-      <div class="p-3 border-0 rounded text-center text-light" 
-           style="background: linear-gradient(135deg, #8b5cf6, #a855f7);">
-        <h6 class="fw-bold">JAMAAT TIME</h6>
-        <p class="mb-0">{{ jamaatTime }}</p>
+      <!-- SUN POSITIONS CARD -->
+      <div class="p-4 rounded text-center text-light"
+           style="background: linear-gradient(135deg, #16a34a, #4ade80);">
+        <p class="fw-semibold mb-1">Location-Based Timings</p>
+        <small>Dynamic based on your GPS</small>
       </div>
 
-      <!-- Prayer Times List -->
-      <div class="d-flex flex-wrap justify-content-center gap-3">
-        <div 
-          *ngFor="let prayer of prayerTimes" 
-          class="rounded p-3 text-center flex-fill text-white shadow"
-          style="min-width: 150px; max-width: 200px; background: linear-gradient(135deg, #0ea5e9, #22d3ee);">
-          <h6 class="fw-semibold mb-1">{{ prayer.name }}</h6>
-          <small>Azan: {{ prayer.azan }}</small><br>
-          <small>Jamaat: {{ prayer.jamaat }}</small>
-        </div>
+      <!-- EXAMPLE NOTICE -->
+      <div class="p-4 rounded text-center text-light"
+           style="background: linear-gradient(135deg, #f97316, #fb923c);">
+        <p class="fw-semibold mb-1">Note:</p>
+        <small>Times are automatically calculated based on your location and time zone.</small>
       </div>
 
     </div>
