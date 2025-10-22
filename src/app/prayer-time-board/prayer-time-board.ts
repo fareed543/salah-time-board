@@ -12,7 +12,7 @@ import { GeoService } from './geo';
 })
 export class PrayerTimeBoard implements OnInit {
   originalOrder = (a: KeyValue<string, string>, b: KeyValue<string, string>): number => {
-  return 0; // keeps the original order
+    return 0; 
   };
   prayerTimes: any = {};
   currentTime = '';
@@ -25,11 +25,12 @@ export class PrayerTimeBoard implements OnInit {
   islamicMonthName = '';
   islamicYear = '';
 
+  loading = false;
+errorMessage: string | null = null; 
   constructor(
     private prayerService: PrayerTimeService,
-    private geoService: GeoService,
     private ngZone: NgZone
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getLocationAndTimes();
@@ -41,16 +42,15 @@ export class PrayerTimeBoard implements OnInit {
   }
 
   getLocationAndTimes() {
+    console.log(performance.now());
     if (navigator.geolocation) {
+      this.loading = true;
       navigator.geolocation.getCurrentPosition(
         (position) => {
           this.ngZone.run(() => {
             const lat = position.coords.latitude;
             const lng = position.coords.longitude;
-            const address = this.geoService.getCityName(lat, lng);
-            console.log(address);
-            
-          
+
             const tzOffset = -new Date().getTimezoneOffset() / 60;
 
             const date = new Date();
@@ -69,10 +69,29 @@ export class PrayerTimeBoard implements OnInit {
               midnight: this.formatTime(times.midnight)
             };
 
-            console.log('📿 Prayer Times Calculated:', this.prayerTimes);
+            this.loading = false; // hide spinner
+
+            console.log(performance.now());
           });
         },
-        (error) => console.error('❌ Error getting location:', error)
+        (error) => {
+        this.ngZone.run(() => {
+          this.loading = false;
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              this.errorMessage = 'Location permission denied. Please allow location access.';
+              break;
+            case error.POSITION_UNAVAILABLE:
+              this.errorMessage = 'Location unavailable. Please try again.';
+              break;
+            case error.TIMEOUT:
+              this.errorMessage = 'Location request timed out. Please try again.';
+              break;
+            default:
+              this.errorMessage = 'An unknown error occurred while fetching location.';
+          }
+        });
+      },
       );
     } else {
       console.error('⚠️ Geolocation not supported by this browser.');
