@@ -1,7 +1,6 @@
 import { CommonModule, KeyValue } from '@angular/common';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { PrayerTimeService } from './prayer-time';
-import { GeoService } from './geo';
 
 @Component({
   selector: 'app-prayer-time-board',
