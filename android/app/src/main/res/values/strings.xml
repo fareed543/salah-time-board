@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">salah-time-board</string>
-    <string name="title_activity_main">salah-time-board</string>
-    <string name="package_name">com.example.app</string>
-    <string name="custom_url_scheme">com.example.app</string>
+    <string name="app_name">SalahTime</string>
+    <string name="title_activity_main">SalahTime</string>
+    <string name="package_name">com.example.salahtime</string>
+    <string name="custom_url_scheme">com.example.salahtime</string>
 </resources>
