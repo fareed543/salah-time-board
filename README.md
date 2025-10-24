@@ -57,3 +57,99 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+# Mobile APK Build Instructions
+
+Follow these steps to generate a signed APK for your Angular + Capacitor project.
+
+## 1. Build Angular App
+Run the following command to build your Angular project:
+
+    npm run build
+
+This will create the `dist/` folder with your compiled web files.
+
+---
+
+## 2. Copy Web Assets to Capacitor
+Copy the web assets to Capacitor:
+
+    npx cap copy
+
+---
+
+## 3. Add Android Platform (Only Once)
+Add the Android platform to your project:
+
+    npx cap add android
+
+⚠️ Skip this step if Android platform is already added to avoid overwriting changes.
+
+---
+
+## 4. Copy Again After Adding Platform
+Copy assets specifically for Android:
+
+    npx cap copy android
+
+---
+
+## 5. Open Android Project in Android Studio
+Open the Android project:
+
+    npx cap open android
+
+From Android Studio, build your APK via:
+
+    Build → Build Bundle(s)/APK(s) → Build APK(s)
+
+---
+
+## 6. (Optional) Build Unsigned Release APK via Command Line
+Navigate to the Android folder:
+
+    cd android
+
+Run Gradle to assemble the release APK:
+
+    ./gradlew assembleRelease
+
+This generates `app-release-unsigned.apk` at:
+
+    android/app/build/outputs/apk/release/
+
+---
+
+## 7. Sign the APK
+Sign the unsigned APK using `apksigner`:
+
+    apksigner sign --ks "D:\salah-time-board\android\app\my-release-key.keystore" --out app-release-signed.apk app-release-unsigned.apk
+
+Notes:
+- Ensure `apksigner` is in your system PATH (comes with Android SDK build-tools).
+- Verify the unsigned APK path if you get a "no such file" error.
+
+---
+
+## 8. Verify the Signed APK (Recommended)
+Verify the APK signature:
+
+    apksigner verify app-release-signed.apk
+
+---
+
+## 9. Install or Share APK
+You can now install the APK on a device:
+
+    adb install app-release-signed.apk
+
+---
+
+## Common Gotchas
+- In `android/app/build.gradle`, ensure `minifyEnabled false` under release config if you don't want code shrinking.
+- Keystore path and alias must match the ones used during signing.
+- Always build from a clean state if assets are changed:
+
+    npx cap clean
+    npm run build
+    npx cap copy android
