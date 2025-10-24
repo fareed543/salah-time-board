@@ -1,16 +1,31 @@
+<!-- Header -->
+<header id="header">
+  <a href="index.html" class="logo"><strong>Salah </strong> Timings</a>
+  <!-- <ul class="icons">
+    <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+    <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+    <li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+    <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+    <li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+  </ul> -->
+</header>
+
+
+
+
 <div class="text-center py-1">
-  <h2 class="fw-bold text-gradient">Salah Timings</h2>
+  <h2 class="fw-bold text-gradient"></h2>
 </div>
 
 <div class="container py-2">
   <div class="row g-4">
-    
+
     <!-- LEFT SECTION -->
     <div class="col-12 col-lg-6 d-flex flex-column gap-3">
 
       <!-- TIME & DATE CARD -->
       <div class="p-4 border rounded text-center text-light"
-           style="background: linear-gradient(135deg, #3b82f6, #06b6d4);">
+        style="background: linear-gradient(135deg, #3b82f6, #06b6d4);">
         <h4 class="mb-1">{{ currentTime }}</h4>
         <p class="mb-1">{{ dayOfWeek }}</p>
         <p class="mb-1">{{ day }} - {{ month }} {{ year }}</p>
@@ -24,17 +39,16 @@
         <!-- Spinner inside container -->
         <div *ngIf="loading" class="spinner-container">
           <div class="spinner"></div>
-        </div>  
+        </div>
 
         <div *ngIf="errorMessage" class="text-danger text-center">
           <small>{{ errorMessage }}</small>
         </div>
         <!-- Prayer time cards -->
-        <div 
-          *ngFor="let key of prayerTimes | keyvalue: originalOrder"
+        <div *ngFor="let key of prayerTimes | keyvalue: originalOrder"
           class="rounded p-3 text-center flex-fill text-white shadow"
           style="min-width: 150px; max-width: 200px; background: linear-gradient(135deg, #0ea5e9, #22d3ee);">
-          <h6 class="fw-semibold mb-1">{{ key.key | titlecase}}</h6>
+          <h5 class="fw-semibold mb-1">{{ key.key | titlecase}}</h5>
           <small>{{ key.value }}</small>
         </div>
       </div>
@@ -46,15 +60,13 @@
     <div class="col-12 col-lg-6 d-flex flex-column gap-3">
 
       <!-- SUN POSITIONS CARD -->
-      <div class="p-4 rounded text-center text-light"
-           style="background: linear-gradient(135deg, #16a34a, #4ade80);">
+      <div class="p-4 rounded text-center text-light" style="background: linear-gradient(135deg, #16a34a, #4ade80);">
         <p class="fw-semibold mb-1">Location-Based Timings</p>
         <small>Dynamic based on your GPS</small>
       </div>
 
       <!-- EXAMPLE NOTICE -->
-      <div class="p-4 rounded text-center text-light"
-           style="background: linear-gradient(135deg, #f97316, #fb923c);">
+      <div class="p-4 rounded text-center text-light" style="background: linear-gradient(135deg, #f97316, #fb923c);">
         <p class="fw-semibold mb-1">Note:</p>
         <small>Times are automatically calculated based on your location and time zone.</small>
       </div>
