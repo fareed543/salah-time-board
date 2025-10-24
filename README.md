@@ -87,9 +87,9 @@ Open the Android project:`npx cap open android`
 
 ## 6. (Optional) Build Unsigned Release APK via Command Line
 Navigate to the Android folder:    `cd android`
+`gradlew clean`
 Run Gradle to assemble the release APK: `gradlew assembleRelease`
-
-This generates `app-release-unsigned.apk` at: `cd D:\salah-time-board\android\app\build\outputs\apk\release `
+This generates `app-release-unsigned.apk` at: `cd D:\salah-time-board\android\app\build\outputs\apk\release`
 
 ## 7. Sign the APK
 Sign the unsigned APK using `apksigner`:
