@@ -107,7 +107,6 @@ Verify the APK signature:   `apksigner verify app-release-signed.apk`
 ## 9. Install or Share APK
 You can now install the APK on a device:    `adb install app-release-signed.apk`
 
----
 
 ## Common Gotchas
 - In `android/app/build.gradle`, ensure `minifyEnabled false` under release config if you don't want code shrinking.
@@ -122,15 +121,15 @@ You can now install the APK on a device:    `adb install app-release-signed.apk`
 
 Genere abb 
 cd android   
->gradlew bundleRelease
-
+`gradlew clean`
+`gradlew bundleRelease`
 
 issue : app-release.aab All uploaded bundles must be signed.
+<!-- cd D:\salah-time-board\android\app\build\outputs\bundle\release -->
+keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
 
->keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
 
-
-issue : Remove conflicts from the manifest before uploading. The following content provider authorities are in use by other developers: com.example.app.androidx-startup, com.example.app.fileprovider. You need to use a different package name because "com.example" is restricted.
+Remove conflicts from the manifest before uploading. The following content provider authorities are in use by other developers: com.salahtime.fileprovider.You need to use a different package name because "com.salahtime" already exists in Google Play.
 
 
 
@@ -142,3 +141,112 @@ Run one of the following (inside android folder):
 
 ➡ For APK: `./gradlew assembleRelease`
 ➡ For AAB (recommended for Play Store):`./gradlew bundleRelease`
+
+
+
+Icon Prompt
+
+Generate an icon for my Salah Time app.
+The background should be dark green.
+Include a mosque frame, and inside it, place a clock dial.
+Add small text “SalahTime” below the clock, within the mosque frame.
+The overall design should be clean, minimalistic, and well-balanced.
+
+
+https://play.google.com/apps/internaltest/4700902351378718630
+
+
+
+Prayer Times 
+Logo    
+
+
+i wanto build mobile app
+
+about salah
+salah timings
+
+faraiz
+sunnat
+wajibaad
+mustahab
+makruhaat.
+
+so that every one should know about salah.
+
+
+🕌 Prayer Times – Your Complete Salah Companion
+
+Description:
+Prayer Times is a beautifully designed Islamic mobile app that helps every Muslim stay connected with their daily prayers. Whether you’re at home, at work, or traveling, this app provides accurate Salah timings, detailed prayer guidance, and essential knowledge about every aspect of Salah — all in one place.
+
+🌙 Key Features
+
+📅 Accurate Salah Timings:
+Get real-time and location-based prayer times (Fajr, Dhuhr, Asr, Maghrib, Isha) with elegant daily and weekly views.
+
+🕌 Detailed Salah Guidance:
+Learn everything about Salah, including:
+
+Faraiz (Obligatory acts) – What makes Salah valid and complete.
+
+Sunnat (Recommended acts) – Actions performed by the Prophet ﷺ.
+
+Wajibat (Necessary acts) – Actions that should not be missed.
+
+Mustahab (Preferred acts) – Actions that increase reward.
+
+Makruhaat (Disliked acts) – Things to avoid during Salah.
+
+🧭 Qibla Direction Finder:
+Find the direction of the Kaaba easily using the built-in compass.
+
+🕋 Islamic Calendar & Reminders:
+Stay updated with Islamic dates and get smart reminders before each Salah.
+
+📖 Educational Section:
+Enhance your understanding of Salah through authentic references and easy-to-follow explanations.
+
+🎨 Simple & Elegant UI:
+Clean design, smooth performance, and dark/light modes for better user comfort.
+
+📱 Why Use Prayer Times?
+
+Our goal is to make Salah easy to understand and punctual for everyone — from beginners to lifelong practitioners. The app not only tells you when to pray but also teaches you how and why to pray correctly.
+
+Developer’s Note:
+Prayer Times is a humble effort to spread knowledge and awareness about Salah — the foundation of Islam. May it guide and remind us all to stay regular in our prayers.
+
+Keywords:
+Salah, Prayer Times, Namaz, Islamic App, Muslim Prayer, Quran, Islam, Salah Guide, Faraiz, Sunnat, Wajibat, Mustahab, Makruh, Qibla, Adhan, Prayer Reminder, Islamic Calendar.
+
+Would you like me to tailor this description for the Google Play Store listing format (with sections like “Short description,” “Full description,” and “What’s new”) or for the Apple App Store version?
+
+
+Namaz Time
+
+Refer  :
+https://www.intellectdesign.com/digital-trust/
+https://www.intellectdesign.com/iturmeric/#form
+https://www.intellectdesign.com/digital-engagement/
+
+
+
+npm run build
+npx cap copy
+cd android
+ ./gradlew assembleRelease  -- generating 
+
+ ------------
+
+ fareed543@gmail.com, 
+fareed54313@gmail.com, 
+steman.fareed@gmail.com, 
+techdefeat.com@gmail.com, abdulfareed.md@gmail.com
+saits.yard@gmail.com
+01ibconsulting@gmail.com
+
+keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+
+Remove conflicts from the manifest before uploading. The following content provider authorities are in use by other developers: com.example.app.androidx-startup, com.example.app.fileprovider.
+You need to use a different package name because "com.example" is restricted.
