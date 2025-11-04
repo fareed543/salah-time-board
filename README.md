@@ -33,51 +33,19 @@ For more information on using the Angular CLI, including detailed command refere
 # Mobile APK Build Instructions
 
 Follow these steps to generate a signed APK for your Angular + Capacitor project.
-
-## 1. Build Angular App
-Run the following command to build your Angular project:    ` npm run build`
-
-## 2. Copy Web Assets to Capacitor
-Copy the web assets to Capacitor:    `npx cap copy`
-
-
-## 3. Add Android Platform (Only Once)
-Add the Android platform to your project:      `npx cap add android`
-⚠️ Skip this step if Android platform is already added to avoid overwriting changes.
-
----
-
-## 4. Copy Again After Adding Platform
-Copy assets specifically for Android: `npx cap copy android`
+1. Build Angular App Run the following command to build your Angular project:    ` npm run build`
+2. Copy Web Assets to Capacitor Copy the web assets to Capacitor:    `npx cap copy`
+3. Add Android Platform (Only Once) Add the Android platform to your project:      `npx cap add android` (Skip this step if Android platform is already added to avoid overwriting changes.)
+4. Copy Again After Adding Platform Copy assets specifically for Android: `npx cap copy android`
+5. Open Android Project in Android Studio Open the Android project:`npx cap open android`
+6. (Optional) Build Unsigned Release APK via Command Line Navigate to the Android folder:    `cd android`
+7. Run Gradle to assemble the release APK: `gradlew clean` then`gradlew assembleRelease`
+8. This generates `app-release-unsigned.apk` at: `cd D:\salah-time-board\android\app\build\outputs\apk\release`
+9. Sign the APK Sign the unsigned APK using `apksigner`: `apksigner sign --ks "D:\salah-time-board\android\app\my-release-key.keystore" --out salahtime.apk app-release-unsigned.apk`
+10. Notes: - Ensure `apksigner` is in your system PATH (comes with Android SDK build-tools). - Verify the unsigned APK path if you get a "no such file" error. Verify the Signed APK (Recommended) Verify the APK signature:   `apksigner verify app-release-signed.apk`
 
 ---
 
-## 5. Open Android Project in Android Studio
-Open the Android project:`npx cap open android`
-
----
-
-## 6. (Optional) Build Unsigned Release APK via Command Line
-Navigate to the Android folder:    `cd android`
-`gradlew clean`
-Run Gradle to assemble the release APK: `gradlew assembleRelease`
-This generates `app-release-unsigned.apk` at: `cd D:\salah-time-board\android\app\build\outputs\apk\release`
-
-## 7. Sign the APK
-Sign the unsigned APK using `apksigner`:
-    `apksigner sign --ks "D:\salah-time-board\android\app\my-release-key.keystore" --out salahtime.apk app-release-unsigned.apk`
-
-Notes:
-- Ensure `apksigner` is in your system PATH (comes with Android SDK build-tools).
-- Verify the unsigned APK path if you get a "no such file" error.
-
-## 8. Verify the Signed APK (Recommended)
-Verify the APK signature:   `apksigner verify app-release-signed.apk`
-
----
-
-## 9. Install or Share APK
-You can now install the APK on a device:    `adb install app-release-signed.apk`
 
 
 ## Common Gotchas
