@@ -1,12 +1,12 @@
 # SalahTimeBoard
 
 ## App Setup Instructions 
-  Project created using Angular CLI v20.3.4
-  Start local server: `ng serve`
-  Open app at: http://localhost:4200/ Auto reloads on source file changes
-  Generate a new component: `ng generate component component-name`
-  View all schematics: `ng generate --help`
-  Build the project: `ng build`
+  -  Project created using Angular CLI v20.3.4
+  -  Start local server: `ng serve`
+  -  Open app at: http://localhost:4200/ Auto reloads on source file changes
+  -  Generate a new component: `ng generate component component-name`
+  -  View all schematics: `ng generate --help`
+  -  Build the project: `ng build`
 
 ## Running unit tests
 
