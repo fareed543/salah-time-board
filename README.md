@@ -1,4 +1,4 @@
-# SalahTimeBoard
+# SalahTime
 
 ## App Setup Instructions 
   -  Project created using Angular CLI v20.3.4
