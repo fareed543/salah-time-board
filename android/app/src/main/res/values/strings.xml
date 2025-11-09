@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">SalahTime</string>
-    <string name="title_activity_main">SalahTime</string>
-    <string name="package_name">com.fareed.salahtime</string>
-    <string name="custom_url_scheme">com.fareed.salahtime</string>
-</resources>
