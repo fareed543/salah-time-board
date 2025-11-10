@@ -11,7 +11,27 @@ import { Geolocation } from '@capacitor/geolocation';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  originalOrder = (a: KeyValue<string, string>, b: KeyValue<string, string>): number => 0;
+originalOrder = (
+  a: KeyValue<string, { start: Date; end: Date }>,
+  b: KeyValue<string, { start: Date; end: Date }>
+): number => {
+  const order = [
+    'sahri',
+    'fajr',
+    'tulu',
+    'chast',
+    'zawal',
+    'dhuhr',
+    'asr',
+    'gurub',
+    'iftar',
+    'maghrib',
+    'awabin',    
+    'isha',
+    'tahajjud'
+  ];
+  return order.indexOf(a.key) - order.indexOf(b.key);
+};
   
   prayerTimes: any = {};
   currentTime = '';
@@ -106,20 +126,8 @@ export class DashboardComponent implements OnInit {
     const tzOffset = -new Date().getTimezoneOffset() / 60;
     const date = new Date();
     const times = this.waqtService.getTimes(date, lat, lng, tzOffset);
-
-    this.prayerTimes = {
-      sahri: this.formatTime(times.sahri),
-      fajr: this.formatTime(times.fajr),
-      tulu: this.formatTime(times.tulu),
-      dhuhr: this.formatTime(times.dhuhr),
-      asr: this.formatTime(times.asr),
-      gurub: this.formatTime(times.gurub),
-      iftar: this.formatTime(times.iftar),
-      maghrib: this.formatTime(times.maghrib),
-      isha: this.formatTime(times.isha),
-      midnight: this.formatTime(times.midnight)
-    };
-
+    console.log(times);
+    this.prayerTimes = times;
     this.loading = false;
   }
 

@@ -25,6 +25,10 @@ export class WaqtService {
     return new Date(time.getTime() - mins * 60000);
   }
 
+  private addMinutes(time: Date, mins: number): Date {
+    return new Date(time.getTime() + mins * 60000);
+  }
+
   getTimes(date: Date, lat: number, lng: number, tzOffset: number) {
     const n = Math.ceil(
       (date.getTime() - new Date(date.getFullYear(), 0, 0).getTime()) / 86400000
@@ -61,15 +65,16 @@ export class WaqtService {
       return this.toDeg(omega) / 15;
     };
 
+    // Main prayer times in hours
     const sunrise = noon - calcTime(0.833);
     const sunset = noon + calcTime(0.833);
     const fajr = noon - calcTime(18);
     const isha = noon + calcTime(17);
     const dhuhr = noon;
-    const asr = dhuhr + 3.5; // basic offset for Asr
+    const asr = dhuhr + 3.5; // approximate offset for Asr
     const midnight = (sunset + fajr) / 2;
 
-    // Convert hours to Date
+    // Convert hours to Date objects
     const times = {
       fajr: this.hoursToDate(date, fajr),
       sunrise: this.hoursToDate(date, sunrise),
@@ -80,25 +85,43 @@ export class WaqtService {
       midnight: this.hoursToDate(date, midnight)
     };
 
-    // Additional times
-    const sahri = this.subtractMinutes(times.fajr, 10); // 10 min before Fajr
-    const iftar = times.maghrib;
-    const tulu = times.sunrise;
-    const zawal = times.dhuhr;
-    const gurub = times.maghrib;
+    // --- Derived periods ---
+    const sahriEnd = times.fajr;
+    const sahriStart = this.subtractMinutes(times.fajr, 90); // 1.5 hrs before Fajr
 
+    const tulu = times.sunrise;
+    const chastStart = this.addMinutes(tulu, 20); // 20 mins after sunrise
+    const chastEnd = this.subtractMinutes(times.dhuhr, 10); // till ~10 mins before Dhuhr
+
+    const zawalStart = this.subtractMinutes(times.dhuhr, 5);
+    const zawalEnd = this.addMinutes(times.dhuhr, 5);
+
+    const asrEnd = this.subtractMinutes(times.maghrib, 10);
+
+    const maghribEnd = this.addMinutes(times.maghrib, 45);
+    const awabinStart = this.addMinutes(times.maghrib, 5);
+    const awabinEnd = this.addMinutes(times.maghrib, 40);
+
+    const iftar = times.maghrib;
+
+    const tahajjudStart = this.addMinutes(times.isha, 90);
+    const tahajjudEnd = this.subtractMinutes(times.fajr, 30);
+
+    // Return structured time slots
     return {
-      sahri: sahri,
-      fajr: times.fajr,
-      tulu: tulu,
-      zawal: zawal,
-      dhuhr: times.dhuhr,
-      asr: times.asr,
-      gurub: gurub,
-      maghrib: times.maghrib,
-      iftar: iftar,
-      isha: times.isha,
-      midnight: times.midnight
+      sahri: { start: sahriStart, end: sahriEnd },
+      fajr: { start: sahriEnd, end: tulu },
+      tulu: { start: tulu, end: chastStart },
+      chast: { start: chastStart, end: chastEnd },
+      zawal: { start: zawalStart, end: zawalEnd },
+      dhuhr: { start: zawalEnd, end: times.asr },
+      asr: { start: times.asr, end: asrEnd },
+      gurub: { start: times.maghrib, end: maghribEnd },
+      maghrib: { start: times.maghrib, end: maghribEnd },
+      awabin: { start: awabinStart, end: awabinEnd },
+      iftar: { start: iftar, end: this.addMinutes(iftar, 20) },
+      isha: { start: times.isha, end: tahajjudStart },
+      tahajjud: { start: tahajjudStart, end: tahajjudEnd }
     };
   }
 }

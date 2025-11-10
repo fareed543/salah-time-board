@@ -45,12 +45,19 @@
           <small>{{ errorMessage }}</small>
         </div>
         <!-- Prayer time cards -->
-        <div *ngFor="let key of prayerTimes | keyvalue: originalOrder"
-          class="rounded p-3 text-center flex-fill text-white shadow"
-          style="min-width: 150px; max-width: 200px; background: linear-gradient(135deg, #0ea5e9, #22d3ee);">
-          <h5 class="fw-semibold mb-1">{{ key.key | titlecase}}</h5>
-          <small>{{ key.value }}</small>
-        </div>
+        <div
+  *ngFor="let key of prayerTimes | keyvalue: originalOrder"
+  class="rounded p-3 text-center flex-fill text-white shadow"
+  style="min-width: 150px; max-width: 200px; background: linear-gradient(135deg, #0ea5e9, #22d3ee);"
+>
+  <h5 class="fw-semibold mb-1">{{ key.key | titlecase }}</h5>
+
+  <small>
+    {{ key.value.start | date: 'hh:mm a' }} - {{ key.value.end | date: 'hh:mm a' }}
+  </small>
+</div>
+
+
       </div>
 
 
