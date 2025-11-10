@@ -3,7 +3,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
 import { WaqtService } from '../waqt.service';
 import { Geolocation } from '@capacitor/geolocation';
-
+import * as moment from 'moment-hijri';
 
 @Component({
   selector: 'app-dashboard',
@@ -157,29 +157,10 @@ originalOrder = (
   }
 
   updateIslamicDate() {
-    const now = new Date();
-    const islamicDate = new Intl.DateTimeFormat('en-TN-u-ca-islamic', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-      weekday: 'long'
-    }).formatToParts(now);
-
-    for (const part of islamicDate) {
-      switch (part.type) {
-        case 'weekday':
-          this.islamicDay = part.value;
-          break;
-        case 'day':
-          this.islamicDateNumber = part.value;
-          break;
-        case 'month':
-          this.islamicMonthName = part.value;
-          break;
-        case 'year':
-          this.islamicYear = part.value;
-          break;
-      }
-    }
+  const now = moment();
+  this.islamicDay = now.format('dddd'); // e.g., Friday
+  this.islamicDateNumber = now.format('iD'); // Hijri date
+  this.islamicMonthName = now.format('iMMMM'); // Hijri month (e.g., Jumada al-Ula)
+  this.islamicYear = now.format('iYYYY'); // Hijri year
   }
 }
