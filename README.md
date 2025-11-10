@@ -35,6 +35,9 @@ For more information on using the Angular CLI, including detailed command refere
 Follow these steps to generate a signed APK for your Angular + Capacitor project.
 1. Build Angular App Run the following command to build your Angular project:    ` npm run build`
 2. Copy Web Assets to Capacitor Copy the web assets to Capacitor:    `npx cap copy`
+install capasitor packs `npm install @capacitor/core @capacitor/cli --save`
+install android pack `npm install @capacitor/android`
+
 3. Add Android Platform (Only Once) Add the Android platform to your project:      `npx cap add android` (Skip this step if Android platform is already added to avoid overwriting changes.)
 4. Copy Again After Adding Platform Copy assets specifically for Android: `npx cap copy android`
 5. Open Android Project in Android Studio Open the Android project:`npx cap open android`
